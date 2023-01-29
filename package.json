@@ -9,7 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^12.2.0",
-    "@faker-js/faker": "^7.6.0"
-  }
+    "@faker-js/faker": "^7.6.0",
+    "cypress": "^12.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EAOzz/HomeWork-HW_18_1_e2e_santa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EAOzz/HomeWork-HW_18_1_e2e_santa/issues"
+  },
+  "homepage": "https://github.com/EAOzz/HomeWork-HW_18_1_e2e_santa#readme"
 }
