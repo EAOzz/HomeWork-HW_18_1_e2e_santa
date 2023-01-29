@@ -3,7 +3,6 @@ const boxPage = require("../fixtures/pages/boxPage.json");
 const generalElements = require("../fixtures/pages/general.json");
 const dashboardPage = require("../fixtures/pages/dashboardPage.json");
 const invitePage = require("../fixtures/pages/invitePage.json");
-// const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.json");
 import { faker } from "@faker-js/faker";
 
 describe("user can create a box and run it", () => {
@@ -23,12 +22,16 @@ describe("user can create a box and run it", () => {
   let maxAmount = 50;
   let currency = "Евро";
   let inviteLink;
+  let keyBox;
 
   it("user logins and create a box", () => {
     cy.visit("/login");
     cy.login(users.userAutor.email, users.userAutor.password);
     cy.contains("Создать коробку").click();
     cy.get(boxPage.boxNameField).type(newBoxName);
+    cy.get(':nth-child(3) > .frm').invoke('val').then((key) => {
+      keyBox = key;
+    });
     cy.get(generalElements.arrowRight).click();
     cy.get(boxPage.sixthIcon).click();
     cy.get(generalElements.arrowRight).click();
@@ -83,6 +86,18 @@ describe("user can create a box and run it", () => {
     cy.createdUsercard(wishes);
     cy.clearCookies();
   });
+
+  it("draw", () => {
+    cy.visit("/login");
+    cy.login(users.userAutor.email, users.userAutor.password);
+    cy.get('[href="/account/boxes"] > .header-item').last().click();
+    cy.contains(newBoxName).click();
+    cy.get('a > .txt-secondary--med').click({force: true});
+    cy.get(generalElements.submitButton).click();
+    cy.get('.santa-modal_content_buttons > .btn-main').click();
+    cy.clearCookies();
+
+  })
 
   after("delete box", () => {
     cy.visit("/login");
