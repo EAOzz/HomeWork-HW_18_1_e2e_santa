@@ -107,15 +107,17 @@ describe("user can create a box and run it", () => {
   });
 
    after("delete box", () => {
-    cy.visit("/login");
-    cy.login(users.userAutor.email, users.userAutor.password);
-    cy.get(dashboardPage.boxButton).last().click();
-    cy.get(boxPage.boxCardButton).first().click();
-    cy.get(boxPage.boxMenuButton).last().click();
-    cy.contains("Архивация и удаление").click({ force: true });
-    cy.get(boxPage.boxDeleteField).type(
-      "Удалить коробку"
-    );
-    cy.get(boxPage.doxDeleteConfirmationButton).click();
-  });
+
+    let boxUrl = "/api/box/" + keyBox;
+
+    cy.request({
+      method: "DELETE",
+      headers:{
+        cookie: users.user1.cookie
+      },
+      url: boxUrl
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+    })
+   });
 });
