@@ -113,7 +113,7 @@ describe("user can create a box and run it", () => {
     cy.request({
       method: "DELETE",
       headers:{
-        cookie: users.user1.cookie
+        cookie: users.userAutor.cookie
       },
       url: boxUrl
     }).then((response) => {
