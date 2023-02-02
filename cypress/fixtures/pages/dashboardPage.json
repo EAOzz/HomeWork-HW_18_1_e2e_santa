@@ -1,3 +1,5 @@
 {
-  "createdBoxName": ".layout-1__header-wrapper-fixed .txt-h3--max-1-lines"
+  "createdBoxName": ".layout-1__header-wrapper-fixed .txt-h3--max-1-lines",
+  "notificationsButton": ".layout-1__header-wrapper-fixed .layout-row-start > :nth-child(2)",
+  "notificationsAllReadButton": ".notifications-panel__top > .base--clickable"
 }

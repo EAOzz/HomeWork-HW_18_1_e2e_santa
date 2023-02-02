@@ -59,32 +59,24 @@ describe("user can create a box and run it", () => {
       });
     cy.clearCookies();
   });
-  it("approve as user1", () => {
-    cy.visit(inviteLink);
-    cy.get(generalElements.submitButton).click();
-    cy.contains("войдите").click();
-    cy.login(users.user1.email, users.user1.password);
-    cy.contains("Создать карточку участника").should("exist");
-    cy.createdUsercard(wishes);
-    cy.clearCookies();
-  });
-  it("approve as user2", () => {
-    cy.visit(inviteLink);
-    cy.get(generalElements.submitButton).click();
-    cy.contains("войдите").click();
-    cy.login(users.user2.email, users.user2.password);
-    cy.contains("Создать карточку участника").should("exist");
-    cy.createdUsercard(wishes);
-    cy.clearCookies();
-  });
-  it("approve as user3", () => {
-    cy.visit(inviteLink);
-    cy.get(generalElements.submitButton).click();
-    cy.contains("войдите").click();
-    cy.login(users.user3.email, users.user3.password);
-    cy.contains("Создать карточку участника").should("exist");
-    cy.createdUsercard(wishes);
-    cy.clearCookies();
+
+  
+
+  it("approve as user1, user2, user3", () => {
+    Object.entries(users).forEach((user, index) => {
+      if (index < 1) {
+        return
+      }
+        else {
+          cy.visit(inviteLink);
+          cy.get(generalElements.submitButton).click();
+          cy.contains("войдите").click();
+          cy.login(user[1].email, user[1].password);
+          cy.contains("Создать карточку участника").should("exist");
+          cy.createdUsercard(wishes);
+          cy.clearCookies();
+        }
+    });
   });
 
   it("draw", () => {
@@ -96,10 +88,25 @@ describe("user can create a box and run it", () => {
     cy.get(generalElements.submitButton).click();
     cy.get('.santa-modal_content_buttons > .btn-main').click();
     cy.clearCookies();
-
   })
+    
+  it('checking notifications user1, user2, user3', () => {
+    Object.entries(users).forEach((user, index) => {
+      if (index < 1) {
+        return
+      }
+        else {
+          cy.visit("/login");
+          cy.login(user[1].email, user[1].password);
+          cy.get(dashboardPage.notificationsButton).click();
+          cy.contains(newBoxName).should("exist");
+          cy.get(dashboardPage.notificationsAllReadButton).click();
+          cy.clearCookies();
+        }
+    });
+  });
 
-  after("delete box", () => {
+   after("delete box", () => {
     cy.visit("/login");
     cy.login(users.userAutor.email, users.userAutor.password);
     cy.get(
