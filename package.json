@@ -4,13 +4,17 @@
   "description": "",
   "main": "cypress.config.js",
   "scripts": {
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "cy:allure": "npx cypress run --env allure=true",
+    "cy:clean:report:allure": "allure generate --clean ",
+    "cy:serve:allure": "allure serve"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^15.1.4",
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "allure": "^0.0.0"
   },
   "repository": {
     "type": "git",
@@ -22,6 +26,8 @@
   "homepage": "https://github.com/EAOzz/HomeWork-HW_18_1_e2e_santa#readme",
   "devDependencies": {
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "@shelex/cypress-allure-plugin": "^2.35.2",
+    "allure-commandline": "^2.21.0",
     "cypress": "^12.6.0",
     "esbuild": "^0.17.10"
   }
